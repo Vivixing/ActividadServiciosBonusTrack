@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Built-By: fhano
+Build-Jdk: 17.0.10
+Implementation-Title: resolve-enigma-api3
+Implementation-Version: 1.0.0
+Implementation-Vendor-Id: co.com.echeverri.service.resolveEnigmaApi
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: http://projects.spring.io/spring-boot/resolve-enigma
+ -api3/
+Created-By: Maven Integration for Eclipse
+

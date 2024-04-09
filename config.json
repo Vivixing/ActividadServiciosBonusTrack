@@ -1,0 +1,8 @@
+{  
+   "basePackage":"co.com.echeverri.microservice.resolveEnigmaApi",
+   "configPackage":"co.com.echeverri.microservice.resolveEnigmaApi.config",
+   "apiPackage":"co.com.echeverri.microservice.resolveEnigmaApi.api",
+   "modelPackage":"co.com.echeverri.microservice.resolveEnigmaApi.model",
+   "groupId":"co.com.echeverri.service.resolveEnigmaApi",
+   "artifactId":"resolve-enigma-api4"
+}

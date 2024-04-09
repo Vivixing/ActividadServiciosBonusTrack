@@ -1,0 +1,132 @@
+openapi: 3.0.0
+
+info:
+  description: API for get one step for resolve the enigma how put a giraffe into a refrigerator
+  version: "1.0.0"
+  title: Get One Enigma Step API
+  contact:
+    email: afortega@bancolombia.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+servers:
+  - description: Server Local
+    url: 'https://localhost:8083/v1/getOneEnigma'
+    
+tags:
+  - name: developers
+    description: Operations available to regular developers
+paths:
+  /getStep:
+    post:
+      tags:
+      - "get-one-enigma-step-api-controller"
+      summary: Get one enigma step API 
+      description: Get one enigma step API
+      operationId: getStep
+      requestBody:
+        description: request body get enigma step 
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JsonApiBodyRequest'
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JsonApiBodyResponseSuccess'
+        '424':
+          description: bad input parameter
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JsonApiBodyResponseErrors'
+components:
+  schemas:
+    JsonApiBodyRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetEnigmaRequest'
+    GetEnigmaRequest:
+      type: object
+      required:
+        - header
+        - enigma
+      properties:
+        header:
+          $ref: '#/components/schemas/Header'
+        enigma:
+          type: string
+    Header:
+      type: object
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: string
+        type:
+          type: string      
+    JsonApiBodyResponseErrors:
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+    ErrorDetail:
+      type: object
+      required:
+        - code
+        - detail
+        - id
+        - source
+        - status
+        - title
+      properties:
+        code:
+          type: string
+        detail:
+          type: string
+        id:
+          type: string
+        source:
+          type: string
+        status:
+          type: string
+        title:
+          type: string
+    JsonApiBodyResponseSuccess:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetEnigmaStepResponse'
+    GetEnigmaStepResponse:
+      type: object
+      required:
+        - header
+        - answer
+      properties:
+        header:
+          $ref: '#/components/schemas/Header'
+        answer:
+          type: string
