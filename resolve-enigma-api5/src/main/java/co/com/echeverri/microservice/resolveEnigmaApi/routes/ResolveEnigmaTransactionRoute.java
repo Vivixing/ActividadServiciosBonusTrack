@@ -34,9 +34,7 @@ public class ResolveEnigmaTransactionRoute extends RouteBuilder{
 			}
 		})
 		
-		//.to("direct:get-step-one")
-		//.to("direct:get-step-two")
-		//.to("direct:get-step-three")
+		
 		.multicast(myAggregationStrategy)
         .parallelProcessing()
         .to("direct:get-step-one", "direct:get-step-two", "direct:get-step-three")
