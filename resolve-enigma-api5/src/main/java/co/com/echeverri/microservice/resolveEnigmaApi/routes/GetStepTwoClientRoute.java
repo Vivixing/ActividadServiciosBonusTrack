@@ -17,16 +17,13 @@ public class GetStepTwoClientRoute extends RouteBuilder{
 		.routeId("GetStepTwo")
 		.setHeader(Exchange.HTTP_METHOD,constant("POST"))
 		.setHeader(Exchange.CONTENT_TYPE,constant("application/json"))
-		/*.setBody(simple("{\n  \"data\": [\n    {\n      \"header\": {\n        \"id\": \"12345\",\n        \"type\": \"TestGiraffeRefrigerator\"\n      },\n      \"enigma\": \"How to put a giraffe into a refrigerator?\"\n    }\n  ]\n}"))*/
 		.hystrix()
 		.hystrixConfiguration().executionTimeoutInMilliseconds(2000).end()
 		.to("freemarker:templates/GetStepTwoClientTemplate.ftl")
-		//.log("Request microservice step two ${body}")
 		.to("http4://localhost:8081/v1/getOneEnigma/getStep")
 		.convertBodyTo(String.class)
 		.log("String response microservice step two ${body}")
 		.unmarshal().json(JsonLibrary.Jackson,ClientJsonApiBodyResponseSuccess.class)
-		//.log("Java response microservice step two ${body}")
 		.process(new Processor() {
 			
 			@Override
@@ -34,8 +31,6 @@ public class GetStepTwoClientRoute extends RouteBuilder{
 				ClientJsonApiBodyResponseSuccess stepOneResponse = (ClientJsonApiBodyResponseSuccess)exchange.getIn().getBody();
 				if (stepOneResponse.getData().get(0).getAnswer().equalsIgnoreCase("Step2: Put the giraffe in")) {
 					exchange.setProperty("Step2", stepOneResponse.getData().get(0).getAnswer());
-					//exchange.setProperty("Error", "0000");
-					//exchange.setProperty("descError", "No error");
 				}else {
 					exchange.setProperty("Error", "0001");
 					exchange.setProperty("descError", "Step two is not valid");
