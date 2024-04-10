@@ -53,36 +53,10 @@ public class GetStepApiController implements GetStepApi {
         this.objectMapper = objectMapper;
         this.request = request;
     }
-/*
-    public ResponseEntity<List<JsonApiBodyResponseSuccess>> getStep(@ApiParam(value = "request body get enigma step" ,required=true )  @Valid @RequestBody JsonApiBodyRequest body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<List<JsonApiBodyResponseSuccess>>(HttpStatus.NOT_IMPLEMENTED);
-    }
-    
-    @GetMapping(value = "/orquestador")
-    public ResponseEntity<String> getOrquestador(){
-    	ResolveEnigmaService resolveEnigmaService = new ResolveEnigmaService();
-    	String responseOrquestador = resolveEnigmaService.fraseCompleta();
-    	return new ResponseEntity<>(responseOrquestador,HttpStatus.OK);
-    }
-    
-    public ResponseEntity<List<JsonApiBodyResponseSuccess>> getStep(@ApiParam(value="body",required=true)@Valid @RequestBody JsonApiBodyRequest body){
-		try {
-			producerTemplateResolveEnigma.request();
-			return new ResponseEntity<JsonApiBodyResponseSuccess>(objectMapper.readValue("{\r\n\"data\": [{\r\n\"header\": {\r\n\"id\": \"id\",\r\n\"type\": \"type\"\r\n},\r\n\"answer\": \"answer\"\r\n}]\r\n}",JsonApiBodyResponseSuccess.class),HttpStatus.OK);
-		}catch (Exception e) {
-			log.error("Couldn't serialize response for content type application/json",e);
-			return new ResponseEntity<JsonApiBodyResponseSuccess>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-    }
-    
-    */
+
     
 	    public ResponseEntity<?> getStep(@ApiParam(value="body",required=true) @Valid @RequestBody JsonApiBodyRequest body) {
 	        try {
-	        	//producerTemplateResolveEnigma.send();
-	            //List<JsonApiBodyResponseSuccess> responseList = new ArrayList<>();
-	            //responseList.add(objectMapper.readValue("{\r\n\"data\": [{\r\n\"header\": {\r\n\"id\": \"id\",\r\n\"type\": \"type\"\r\n},\r\n\"answer\": \"answer\"\r\n}]\r\n}", JsonApiBodyResponseSuccess.class));
 	            response = producerTemplateResolveEnigma.withBody(body).request();
 	            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 	            System.out.println(timestamp + " Respuesta Servicio");
